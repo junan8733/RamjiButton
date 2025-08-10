@@ -29,7 +29,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////////
 
 // 비동기적 수행을 위한 구문. 아주 절대적으로 필수적이지는 않다.
-// every의 whichOne 개수만큼 previousMillis, previousRecorded 크기를 맞춰준다.
+// 쓰이는 if(every(일련번호, 10)) {} 작업들의 종류, 즉 일련번호 개수 만큼 previousMillis, previousRecorded 크기를 맞춰준다.
 static unsigned long previousMillis[] = {0,0};
 static uint8_t previousRecorded[] = {0,0};
 static unsigned long currentMillis = 0;
