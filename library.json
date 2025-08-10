@@ -1,6 +1,6 @@
 {
   "name": "RamjiButton",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "keywords": "arduino, button, buttons, pushbutton, combo",
   "description": "Arduino library for detecting and responding to individual and two-button combination inputs.",
   "repository": {
@@ -11,6 +11,18 @@
     "name": "junan8733",
     "email": "junan8733@gmail.com",
     "url": "https://github.com/junan8733/RamjiButton"
+  },
+  "export": {
+    "include": [
+      "src",
+      "examples",
+      "images",
+      "library.json",
+      "library.properties",
+      "README.md",
+      "LICENSE.txt",
+      "keywords.txt"
+    ]
   },
   "license": "BSD-3-Clause",
   "homepage": "https://github.com/junan8733/RamjiButton",
