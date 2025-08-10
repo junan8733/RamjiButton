@@ -96,7 +96,7 @@ This works the same way for two-button combinations. A two-button combination me
 
 ---
 
-* Button 객체 (Button instance)  
+* **Button 객체 (Button instance)**  
 각 버튼마다 생성하는 객체입니다. button.event() 함수를 갖고 있습니다.  
 An instance created for each individual button. It has the button.event() function.  
 
@@ -107,7 +107,7 @@ Button button2(17, INPUT_PULLUP);
 
 ---
 
-* TwoButtonCombo 객체 (TwoButtonCombo instance)  
+* **TwoButtonCombo 객체 (TwoButtonCombo instance)**  
 두 버튼 조합키 입력을 인식하려고 할 때 생성하는 객체입니다. 두 버튼의 Button 객체를 각각 생성하고 이를 통해서 생성합니다. buttonCombo.event() 함수를 갖고 있습니다.  
 An instance created to detect two-button combination inputs. Create a Button instance for each of the two buttons, then use them to create this instance. It has the buttonCombo.event() function.  
 
@@ -117,7 +117,7 @@ TwoButtonCombo buttonCombo(button1, button2);
 
 ---
 
-* CD74HC4067 객체 (CD74HC4067 instance)  
+* **CD74HC4067 객체 (CD74HC4067 instance)**  
 CD74HC4067을 써서 핀의 개수를 확장하여 여러 버튼 입력을 받으려 할 때에 생성하는 CD74HC4067 객체입니다.  
 An instance created when using the CD74HC4067 to expand the number of pins in order to receive multiple button inputs.  
 
@@ -128,7 +128,7 @@ mux.selectChannel(0-15);
 
 ---
 
-* button.event()  
+* **button.event()**  
 버튼 객체가 가진 이 함수를 통해서 각 버튼들의 입력을 인식할 수 있습니다.  
 Through this function of the button instance, you can detect the input of each button.  
 
@@ -138,7 +138,7 @@ int8_t event = button1.event();
 
 ---
 
-* button.doIt(int8_t a)  
+* **button.doIt(int8_t a)**  
 버튼 객체가 가진 기본 내장 구동 함수입니다. 기본 구동 함수 .doIt()은 파라미터가 없는 함수들을 동작시킬 수 있습니다. 동작 함수의 지정은 다음과 같이 할 수 있습니다.  
 The built-in execution function of the button instance. The default .doIt() function can execute functions that take no parameters. You can assign action functions as follows.  
 
@@ -179,7 +179,7 @@ void loop() {
 
 ---
 
-* doIt(int8_t a)  
+* **doIt(int8_t a)**  
 커스텀 구동 함수. 구동 함수를 직접 만들어서 쓸 수 있습니다. 동작 함수들에 파라미터를 받고싶다거나 이런 저런 이유들로 인해서 좀 더 높은 자유도를 원할 때 쓸 수 있습니다.  
 A custom execution function. You can create and use your own execution function. Use this when you want more flexibility, such as when you want the action functions to receive parameters.  
 
@@ -230,7 +230,7 @@ void loop() {
 
 ---
 
-* buttonCombo.event()  
+* **buttonCombo.event()**  
 이것은 버튼 콤보 (TwoButtonCombo) 객체가 가진 event() 함수입니다. 이 buttonCombo.event()를 쓰게 되면 두 버튼 조합키 입력을 인식할 수 있게 됩니다. 이 경우 각 버튼들의 button.event() 함수는 쓰지 않고, buttonCombo.event() 함수만 씁니다.  
 버튼 콤보 객체의 event() 함수는 크기 3인 숫자 배열의 주소값을 포인터로 반환하는데, 버튼1만의 입력이 감지되면 그 숫자가 events[0]에 있고, 버튼2만의 입력이 감지되면 그 숫자가 events[1]에 있고, 버튼1과 버튼2의 조합 입력이 감지되면 그 숫자가 events[2]에 있어서 포인터를 통해 이를 읽을 수 있습니다.  
   <br>
@@ -251,7 +251,7 @@ int8_t button1button2ComboEvent = events[2]; // 버튼1과 버튼2를 동시에 
 
 ---
 
-* buttonCombo.doIt(int8_t a)  
+* **buttonCombo.doIt(int8_t a)**  
 버튼 콤보 객체가 가진 기본 내장 구동 함수입니다. 파라미터가 없는 함수들을 동작시킬 수 있습니다. 동작 함수의 지정은 다음과 같이 할 수 있습니다.  
 The built-in execution function of the combo instance. It can execute functions that take no parameters. You can assign action functions as follows.  
 
@@ -304,7 +304,7 @@ void loop() {
 
 ---
 
-* comboDoIt(int8_t a)  
+* **comboDoIt(int8_t a)**  
 두 버튼 콤보 조합 동작을 위한 커스텀 구동 함수. 커스텀으로 만들어 쓰는 doIt() 함수의 변형입니다.  
 A custom execution function for two-button combination actions. It is a variation of the custom-made doIt() function.  
 

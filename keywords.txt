@@ -1,0 +1,126 @@
+#######################################
+# Syntax Coloring Map for RamjiButton
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+CD74HC4067           KEYWORD1
+Button               KEYWORD1
+TwoButtonCombo       KEYWORD1
+UniversalQueue       KEYWORD1
+MemoryPoolQueue      KEYWORD1
+MemoryPool           KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+selectChannel        KEYWORD2
+dRead                KEYWORD2
+aRead                KEYWORD2
+dWrite               KEYWORD2
+aWrite               KEYWORD2
+
+update               KEYWORD2
+event                KEYWORD2
+doIt                 KEYWORD2
+debugPrint           KEYWORD2
+
+longPress            KEYWORD2
+manyPress            KEYWORD2
+click                KEYWORD2
+doubleClick          KEYWORD2
+tripleClick          KEYWORD2
+quadClick            KEYWORD2
+pentaClick           KEYWORD2
+hexaClick            KEYWORD2
+heptaClick           KEYWORD2
+octaClick            KEYWORD2
+nonaClick            KEYWORD2
+decaClick            KEYWORD2
+
+setPinMode           KEYWORD2
+setLOWHIGH           KEYWORD2
+getLOWHIGH           KEYWORD2
+getActionTime        KEYWORD2
+setLastActionTime    KEYWORD2
+isDebounceActive     KEYWORD2
+setDebounceActive    KEYWORD2
+
+getBt1               KEYWORD2
+getBt2               KEYWORD2
+getCD4067            KEYWORD2
+getCD4067_channel1   KEYWORD2
+getCD4067_channel2   KEYWORD2
+setBt1               KEYWORD2
+setBt2               KEYWORD2
+setCD4067            KEYWORD2
+setCD4067_channel1   KEYWORD2
+setCD4067_channel2   KEYWORD2
+getTwoButtonEventDetected KEYWORD2
+setTwoButtonEventDetected KEYWORD2
+resetTwoButtonEventDetected KEYWORD2
+
+isInitialized        KEYWORD2
+push                 KEYWORD2
+pop                  KEYWORD2
+isEmpty              KEYWORD2
+isFull               KEYWORD2
+size                 KEYWORD2
+capacity             KEYWORD2
+allocate             KEYWORD2
+free                 KEYWORD2
+isInPool             KEYWORD2
+available            KEYWORD2
+
+#######################################
+# Instances (KEYWORD2)
+#######################################
+
+
+
+#######################################
+# Constants / Enums (LITERAL1)
+#######################################
+
+Pressed              LITERAL1
+Released             LITERAL1
+
+NO_ACTION            LITERAL1
+CLICK                LITERAL1
+DOUBLECLICK          LITERAL1
+TRIPLECLICK          LITERAL1
+QUADCLICK            LITERAL1
+PENTACLICK           LITERAL1
+HEXACLICK            LITERAL1
+HEPTACLICK           LITERAL1
+OCTACLICK            LITERAL1
+NONACLICK            LITERAL1
+DECACLICK            LITERAL1
+LONGPRESS            LITERAL1
+MANYPRESS            LITERAL1
+
+noneState            LITERAL1
+intoShortStateLogic  LITERAL1
+intoLongStateLogic   LITERAL1
+
+TWO_BUTTON_TOLLERANCE_TIME    LITERAL1
+COMBINATION_INITIALIZE_TIME   LITERAL1
+ACTION_SUPPRESS_TIME          LITERAL1
+SHORT_REPRESS_TIME            LITERAL1
+LONG_PRESS_TIME               LITERAL1
+MANY_TRIGGER_TIME             LITERAL1
+MANY_REPRESS_TIME             LITERAL1
+
+NOT_DECIDED          LITERAL1
+NO_COMBINATION       LITERAL1
+YES_COMBINATION      LITERAL1
+
+#######################################
+# Custom Define Types (LITERAL2)
+#######################################
+
+ANALOG_INPUT         LITERAL2
+ANALOG_OUTPUT        LITERAL2
