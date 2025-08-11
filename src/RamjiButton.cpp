@@ -198,7 +198,7 @@ int8_t Button::event() {
     now = millis(); // 현재 시점을 계속 체킹.
 
   // 디바운싱 체킹.
-    // 디바운싱 상태인지 체크해서 시간이 지나면 해제. 해제해야 "manyPress()" 같은 함수들이 doIt()에서 실행된다.
+    // 디바운싱 상태인지 체크해서 시간이 지나면 해제. 해제해야 action이 판정된다.
     if (debounceActive && now - lastActionTime >= debounceInterval) {
       debounceActive = false;
     }
@@ -292,10 +292,14 @@ int8_t Button::event() {
       break;
     }
   // 감지된 게 있고, 디바운싱이 해제돼있는 상태라면,
-  if (actionGet && !debounceActive) { // NO_ACTION일 때에는 디바운싱이 체킹되지 않도록 한다.
+  if (actionGet && !debounceActive) {
+    // NO_ACTION일 때에는 디바운싱이 체킹되지 않도록 한다.
     actionTime[action] = now; // 시간 체킹하기.
-    debounceActive = true;
-    lastActionTime = now; // 현재 시간 저장
+    // 판정된 게 MANYPRESS일 경우에는 디바운싱 체킹 안하고 바로 통과.
+    if (action!=MANYPRESS) { // 1.0.3버전에서 MANYPRESS일 때에는 디바운싱이 동작하지 않게 되도록 수정한 부분.
+      debounceActive = true;
+      lastActionTime = now; // 현재 시간 저장
+    }
   }
   // 감지된 게 있지만, 디바운싱이 활성화돼있는 상태이거나,
   // 감지된 게 없으면, action은 NO_ACTION이 된다.

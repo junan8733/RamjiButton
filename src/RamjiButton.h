@@ -18,17 +18,20 @@
 // 두 버튼 manyPress후 버튼에서 손을 떼는 타이밍이 조금 늦었을 때 한 버튼 manyPress나 한 버튼 클릭이 뜰 수 있는데,
 // 두 버튼 manyPress후 (이 시간 + TWO_BUTTON_TOLLERANCE_TIME) 이내의 한 버튼 manyPress나 한 버튼 클릭 동작이 억제된다.
 // 최소한 ACTION_SUPPRESS_TIME이 MANY_REPRESS_TIME 보다 크게 하는데, 260이나 이 정도 이상으로 크게 해놓는 게 좋다.
-#define ACTION_SUPPRESS_TIME 350
+#define ACTION_SUPPRESS_TIME 450
 #define SHORT_REPRESS_TIME 300 // 이 시간 안에 누르면 연속 클릭으로 인정. 이거보다 짧으면 연속 클릭 인식이 잘 안되기 시작한다.
 #define LONG_PRESS_TIME 500 // long press 판정에 걸리는 시간.
 #define MANY_TRIGGER_TIME 500 // (long press 판정 + 이 시간)이 지나면 연속 누름. 그 전에 떼면 길게 누름.
-#define MANY_REPRESS_TIME 100 // manyPress 반복 시간. 연속 누름 동작 판정되면 이후 되풀이에 걸리는 시간. 하지만 체크하는 루프가 이거보다 늦게 돌 경우 당연히 그 속도로 수행되게 될 거다.
-// debounce 대기 시간. manyPress 반복 시간 MANY_REPRESS_TIME보다 약간 작게 해주는 것이 포인트!!
+// manyPress 반복 시간. 연속 누름 동작 판정되면 이후 되풀이에 걸리는 시간. 하지만 체크하는 루프가 이거보다 늦게 돌 경우 당연히 그 속도로 수행되게 될 거다.
+// 버튼 누르고 있으면 다다다다다!! 수행되는데 이걸 크게 하면 반복이 느려지고, 작게 하면 빨라진다.
+#define MANY_REPRESS_TIME 20
+// debounce 대기 시간. manyPress 반복 시간 MANY_REPRESS_TIME보다 약간 작게 해주는 것이 포인트!! => 1.0.3에서 상관 없게 되었다.
 // 만일 manyPress 반복시간을 짧게 해주었는데 이상하게 그만큼 빠르게 동작이 수행되지 않는다면,
 // 디바운싱이 manyPress가 그렇게 빨리 실행되지 않게 중간 중간에 주기적으로 막고 있는 것일 수 있다.
 // 이럴 경우 debounceInterval을 10씩 줄여주면서 살펴본다. 100이었는데 70으로 고쳤더니 해결됐다. 혹시 모르니 60으로 해놓았다.
 // 여차하면 50으로 해도 되겠다. 다만 그럴수록 버튼을 눌렀다 뗄 떼 빠르고 똑소리 나게 떼야한다.
-inline unsigned long debounceInterval = 60; // manyPress 반복 시간 MANY_REPRESS_TIME보다 약간 작게.
+inline unsigned long debounceInterval = 100; // manyPress 반복 시간 MANY_REPRESS_TIME보다 약간 작게.
+// => 1.0.3에서 MANYPRESS 시 디바운싱을 하지 않도록 변경함으로써 MANY_REPRESS_TIME과 debounceInterval이 상관이 없게 되었다.
 
 // 맨 앞 NO_ACTION = 0.
 enum ACTION {

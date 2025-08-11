@@ -1,6 +1,6 @@
 {
   "name": "RamjiButton",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "keywords": "arduino, button, buttons, pushbutton, combo, input, cd4067, 74hc4067, cd74hc4067",
   "description": "Arduino library for detecting and responding to individual and two-button combination inputs.",
   "repository": {
