@@ -184,7 +184,7 @@ void Button::tripleClick() { if (onTripleClick) onTripleClick(); }
 void Button::quadClick() { if (onQuadClick) onQuadClick(); }
 void Button::pentaClick() { if (onPentaClick) onPentaClick(); }
 void Button::hexaClick() { if (onHexaClick) onHexaClick(); }
-void Button:: heptaClick() { if (onHeptaClick) onHeptaClick(); }
+void Button::heptaClick() { if (onHeptaClick) onHeptaClick(); }
 void Button::octaClick() { if (onOctaClick) onOctaClick(); }
 void Button::nonaClick() { if (onNonaClick) onNonaClick(); }
 void Button::decaClick() { if (onDecaClick) onDecaClick(); }
@@ -194,7 +194,7 @@ void Button::decaClick() { if (onDecaClick) onDecaClick(); }
 // 동작 판정이 없을 시 action = NO_ACTION(0)을 리턴.
 // 더 정확히는 동작 판정 시 action에 그걸 저장하고, action값을 리턴.
 int8_t Button::event() {
-    bool actionGet = false; // 동작 판정이 있는지 체킹.
+    action = NO_ACTION; // 동작 판정 전 혹시 모르니 action 초기화.
     now = millis(); // 현재 시점을 계속 체킹.
 
   // 디바운싱 체킹.
@@ -221,6 +221,17 @@ int8_t Button::event() {
       pressed = Released;
     }
 
+  // 1.0.4버전에서 생긴 버튼 오동작 안전장치.
+    // 디바운싱과 조금은 비슷한 오동작 방지.
+    // upTime-downTime이 DISCARD_SHORT_PRESS_DURATION보다 작으면 더이상 코드 수행 안하고 무효 처리.
+    // 동일 버튼이 연속으로 잘못 눌린 걸로 간주한다.
+    // (MANYPRESS 시에는 Pressed 상태라서 upTime-downTime이 엄청 높게 뜨기 때문에 상관없다.)
+    if (upTime - downTime < DISCARD_SHORT_PRESS_DURATION) {
+      upTime = pre_upTime;
+      downTime = pre_downTime;
+      return NO_ACTION;
+    }
+
   // 쇼트, 롱 로직 선정부.
     // ShortState 로직으로 들어갈지 LongState 로직으로 들어갈지 판단한다.
     // 버튼 업 시간이 갱신되었고, 다운->업 시간이 짧다면,
@@ -244,7 +255,6 @@ int8_t Button::event() {
       // 현재 시점과 최근 짧게 누름 시간의 차이가 재누름 시간 한도보다 초과했다면 액션을 수행한다.
       // 아직 재누름 시간 초과 안했으면 아무것도 안한다.
       if(now-shortCallTime > SHORT_REPRESS_TIME) {
-        actionGet = true; // 밑에 것들 중 하나는 반드시 판정이 되므로 일단 동작 판정이 있다고 체킹.
         switch (clickCount) {
         case 1: action = CLICK; break;
         case 2: action = DOUBLECLICK; break;
@@ -265,23 +275,18 @@ int8_t Button::event() {
     case intoLongStateLogic:
       // 버튼이 눌려있고, 연속 누름이 활성화되었다면,
       if(pressed && manyTriggered) {
-        if(now-actionTime[MANYPRESS] >= MANY_REPRESS_TIME) { // 연속 누름 시간이 되면 계속 수행.
-          actionGet = true;
-          action = MANYPRESS;
-        }
+        // 연속 누름 시간이 되면 계속 수행.
+        if(now-actionTime[MANYPRESS] >= MANY_REPRESS_TIME) action = MANYPRESS;
       }
       // 버튼이 눌려있고, 현재 재누름 시간이 지났다면,
       else if(pressed && now-longLogicTime >= MANY_TRIGGER_TIME) {
         manyTriggered = true; // 연속 누름 활성화.
-        actionGet = true;
         action = MANYPRESS;
       }
       // 그 전에 버튼이 떼어졌다면,
       else if(!pressed) {
-        if(manyTriggered==0) { // 연속 누름이 활성화돼있지 않은 상태라면,
-          actionGet = true;
-          action = LONGPRESS;
-        }
+        // 연속 누름이 활성화돼있지 않은 상태라면,
+        if(manyTriggered==0) action = LONGPRESS;
 
         state = noneState; // 상태 초기화.
         manyTriggered = false;
@@ -291,9 +296,10 @@ int8_t Button::event() {
     default:
       break;
     }
+  // NO_ACTION일 때에는 디바운싱이 체킹되지 않도록 한다.
   // 감지된 게 있고, 디바운싱이 해제돼있는 상태라면,
-  if (actionGet && !debounceActive) {
-    // NO_ACTION일 때에는 디바운싱이 체킹되지 않도록 한다.
+  if (action!=NO_ACTION && !debounceActive) {
+    // debugPrint(); // 디버깅용..
     actionTime[action] = now; // 시간 체킹하기.
     // 판정된 게 MANYPRESS일 경우에는 디바운싱 체킹 안하고 바로 통과.
     if (action!=MANYPRESS) { // 1.0.3버전에서 MANYPRESS일 때에는 디바운싱이 동작하지 않게 되도록 수정한 부분.
@@ -457,7 +463,7 @@ void TwoButtonCombo::tripleClick() { if (onTripleClick) onTripleClick(); }
 void TwoButtonCombo::quadClick() { if (onQuadClick) onQuadClick(); }
 void TwoButtonCombo::pentaClick() { if (onPentaClick) onPentaClick(); }
 void TwoButtonCombo::hexaClick() { if (onHexaClick) onHexaClick(); }
-void TwoButtonCombo:: heptaClick() { if (onHeptaClick) onHeptaClick(); }
+void TwoButtonCombo::heptaClick() { if (onHeptaClick) onHeptaClick(); }
 void TwoButtonCombo::octaClick() { if (onOctaClick) onOctaClick(); }
 void TwoButtonCombo::nonaClick() { if (onNonaClick) onNonaClick(); }
 void TwoButtonCombo::decaClick() { if (onDecaClick) onDecaClick(); }
